@@ -1,0 +1,7 @@
+.idea/
+backend/vendor
+bin/
+
+.idea/workspace.xml
+vendor/
+
