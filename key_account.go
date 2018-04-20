@@ -5,22 +5,35 @@ import (
 )
 
 type KeyAccount struct {
-	*hdkeychain.ExtendedKey
+	extendedKey *hdkeychain.ExtendedKey
 	HDStartPath
+}
+
+func NewKeyAccountFromXKey(value string) (*KeyAccount, error) {
+	xKey, err := hdkeychain.NewKeyFromString(value)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &KeyAccount{
+		extendedKey: xKey,
+		HDStartPath: HDStartPath{
+			PurposeIndex: -1,
+			CoinTypeIndex: -1,
+			AccountIndex: -1,
+		},
+	}, nil
 }
 
 func (k *KeyAccount) DeriveAddress(changeType ChangeType, index uint32, network Network) (*Address, error) {
 
 	var changeTypeIndex = uint32(changeType)
 
-	if k.ExtendedKey.IsPrivate() {
-		changeType += HardenedKeyZeroIndex
-	}
-	if k.ExtendedKey.IsPrivate() {
-		index += HardenedKeyZeroIndex
-	}
+	if k.extendedKey.IsPrivate() { changeType = HardenedKeyZeroIndex + changeType }
+	if k.extendedKey.IsPrivate() { index = HardenedKeyZeroIndex + index }
 
-	changeTypeK, err := k.ExtendedKey.Child(changeTypeIndex)
+	changeTypeK, err := k.extendedKey.Child(changeTypeIndex)
 	if err != nil {
 		return nil, err
 	}
@@ -50,7 +63,7 @@ func (k *KeyAccount) DeriveAddress(changeType ChangeType, index uint32, network 
 		},
 		HDEndPath: HDEndPath{
 			ChangeIndex: changeTypeIndex,
-
+			AddressIndex: index,
 		},
 		Value: a.EncodeAddress(),
 	}, nil

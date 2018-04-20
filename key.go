@@ -6,7 +6,7 @@ import (
 )
 
 type ExtendedKey struct {
-	*hdkeychain.ExtendedKey
+	extendedKey *hdkeychain.ExtendedKey
 }
 
 func NewKeyFromSeedHex(seed string, net Network) (privateKey *hdkeychain.ExtendedKey, err error) {
@@ -39,29 +39,29 @@ func NewKeyFromString(value string) (*ExtendedKey, error) {
 
 func (e *ExtendedKey) BIP44AccountKey(accIndex uint32, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
 
-	return e.baseDeriveAccount(accIndex, BIP44Purpose, coinType, includePrivateKey)
+	return e.baseDeriveAccount(BIP44Purpose, accIndex, coinType, includePrivateKey)
 }
 
 func (e *ExtendedKey) BIP49AccountKey(accIndex uint32, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
 
-	return e.baseDeriveAccount(accIndex, BIP49Purpose, coinType, includePrivateKey)
+	return e.baseDeriveAccount(BIP49Purpose, accIndex, coinType, includePrivateKey)
 }
 
 func (e *ExtendedKey) BIP84AccountKey(accIndex uint32, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
 
-	return e.baseDeriveAccount(accIndex, BIP84Purpose, coinType, includePrivateKey)
+	return e.baseDeriveAccount(BIP84Purpose, accIndex, coinType, includePrivateKey)
 }
 
-func (e *ExtendedKey) baseDeriveAccount(accIndex uint32, purpose Purpose, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
+func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, accIndex uint32, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
 
 	var purposeIndex = uint32(purpose)
 	var coinTypeIndex = uint32(coinType)
 
-	if e.ExtendedKey.IsPrivate() { purposeIndex += HardenedKeyZeroIndex }
-	if e.ExtendedKey.IsPrivate() { coinTypeIndex += HardenedKeyZeroIndex }
-	if e.ExtendedKey.IsPrivate() { accIndex += HardenedKeyZeroIndex }
+	if e.extendedKey.IsPrivate() { purposeIndex = HardenedKeyZeroIndex + purposeIndex }
+	if e.extendedKey.IsPrivate() { coinTypeIndex = HardenedKeyZeroIndex + coinTypeIndex }
+	if e.extendedKey.IsPrivate() { accIndex = HardenedKeyZeroIndex + accIndex }
 
-	purposeK, err := e.ExtendedKey.Child(purposeIndex)
+	purposeK, err := e.extendedKey.Child(purposeIndex)
 	if err != nil {
 		return nil, err
 	}
@@ -77,14 +77,14 @@ func (e *ExtendedKey) baseDeriveAccount(accIndex uint32, purpose Purpose, coinTy
 	}
 
 	hdStartPath := HDStartPath{
-		PurposeIndex: purposeIndex,
-		CoinTypeIndex: coinTypeIndex,
-		AccountIndex: accIndex,
+		PurposeIndex: int32(purposeIndex),
+		CoinTypeIndex: int32(coinTypeIndex),
+		AccountIndex: int32(accIndex),
 	}
 
 	if includePrivateKey {
 		return &KeyAccount{
-			ExtendedKey: accK,
+			extendedKey: accK,
 			HDStartPath: hdStartPath,
 		}, nil
 	}
@@ -95,7 +95,7 @@ func (e *ExtendedKey) baseDeriveAccount(accIndex uint32, purpose Purpose, coinTy
 	}
 
 	return &KeyAccount{
-		ExtendedKey: pub,
+		extendedKey: pub,
 		HDStartPath: hdStartPath,
 	}, nil
 }

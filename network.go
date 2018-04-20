@@ -21,5 +21,5 @@ func networkToChainConfig(net Network) (*chaincfg.Params, error) {
 			return &chaincfg.MainNetParams, nil
 	}
 
-	return nil, errors.New("Invalid network")
+	return nil, errors.New("invalid network")
 }
