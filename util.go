@@ -12,6 +12,7 @@ type URIParams struct {
 	Message string
 }
 
+//FIXME return error if not amount or address
 func EncodeURI(p URIParams) string {
 
 	var uri = fmt.Sprintf(
