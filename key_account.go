@@ -55,7 +55,7 @@ func (k *KeyAccount) DeriveAddress(changeType ChangeType, index uint32, network 
 		return nil, err
 	}
 
-	return &Address{
+	address := &Address{
 		HDStartPath: HDStartPath{
 			PurposeIndex: k.PurposeIndex,
 			CoinTypeIndex: k.CoinTypeIndex,
@@ -66,5 +66,7 @@ func (k *KeyAccount) DeriveAddress(changeType ChangeType, index uint32, network 
 			AddressIndex: index,
 		},
 		Value: a.EncodeAddress(),
-	}, nil
+	}
+
+	return address, nil
 }

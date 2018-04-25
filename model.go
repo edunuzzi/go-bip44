@@ -13,6 +13,6 @@ type HDEndPath struct {
 
 type Address struct {
 	HDStartPath HDStartPath `json:"hd_path"`
-	HDEndPath   HDEndPath `json:"hd_path"`
-	Value       string `json:"value"`
+	HDEndPath   HDEndPath   `json:"hd_path"`
+	Value       string      `json:"value"`
 }
