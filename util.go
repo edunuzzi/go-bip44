@@ -13,11 +13,20 @@ type URIParams struct {
 }
 
 func EncodeURI(p URIParams) string {
-	return fmt.Sprintf(
-		"bitcoin:%s?amount=%s&label=%s&message=%s",
+
+	var uri = fmt.Sprintf(
+		"bitcoin:%s?amount=%s",
 		p.Address,
 		strconv.FormatFloat(p.Amount, 'f', -1, 64),
-		p.Label,
-		p.Message,
 	)
+
+	if p.Label != "" {
+		uri = uri + fmt.Sprintf("&label=%s", p.Label)
+	}
+
+	if p.Message != "" {
+		uri = uri + fmt.Sprintf("&message=%s", p.Label)
+	}
+
+	return uri
 }
