@@ -1,8 +1,8 @@
 package bitcoin_address
 
 import (
-	"github.com/btcsuite/btcd/chaincfg"
 	"errors"
+	"github.com/btcsuite/btcd/chaincfg"
 )
 
 type Network int16
@@ -14,11 +14,11 @@ const (
 
 func networkToChainConfig(net Network) (*chaincfg.Params, error) {
 	switch net {
-		case TESTNET3:
-			return &chaincfg.TestNet3Params, nil
+	case TESTNET3:
+		return &chaincfg.TestNet3Params, nil
 
-		case MAINNET:
-			return &chaincfg.MainNetParams, nil
+	case MAINNET:
+		return &chaincfg.MainNetParams, nil
 	}
 
 	return nil, errors.New("invalid network")

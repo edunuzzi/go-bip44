@@ -1,8 +1,8 @@
 package bitcoin_address
 
 import (
-	"github.com/btcsuite/btcutil/hdkeychain"
 	"encoding/hex"
+	"github.com/btcsuite/btcutil/hdkeychain"
 )
 
 type ExtendedKey struct {
@@ -57,9 +57,15 @@ func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, accIndex uint32, coinTy
 	var purposeIndex = uint32(purpose)
 	var coinTypeIndex = uint32(coinType)
 
-	if e.extendedKey.IsPrivate() { purposeIndex = HardenedKeyZeroIndex + purposeIndex }
-	if e.extendedKey.IsPrivate() { coinTypeIndex = HardenedKeyZeroIndex + coinTypeIndex }
-	if e.extendedKey.IsPrivate() { accIndex = HardenedKeyZeroIndex + accIndex }
+	if e.extendedKey.IsPrivate() {
+		purposeIndex = HardenedKeyZeroIndex + purposeIndex
+	}
+	if e.extendedKey.IsPrivate() {
+		coinTypeIndex = HardenedKeyZeroIndex + coinTypeIndex
+	}
+	if e.extendedKey.IsPrivate() {
+		accIndex = HardenedKeyZeroIndex + accIndex
+	}
 
 	purposeK, err := e.extendedKey.Child(purposeIndex)
 	if err != nil {
@@ -77,9 +83,9 @@ func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, accIndex uint32, coinTy
 	}
 
 	hdStartPath := HDStartPath{
-		PurposeIndex: int32(purposeIndex),
+		PurposeIndex:  int32(purposeIndex),
 		CoinTypeIndex: int32(coinTypeIndex),
-		AccountIndex: int32(accIndex),
+		AccountIndex:  int32(accIndex),
 	}
 
 	if includePrivateKey {
