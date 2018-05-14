@@ -19,9 +19,9 @@ func NewKeyAccountFromXKey(value string) (*KeyAccount, error) {
 	return &KeyAccount{
 		extendedKey: xKey,
 		HDStartPath: HDStartPath{
-			PurposeIndex: -1,
+			PurposeIndex:  -1,
 			CoinTypeIndex: -1,
-			AccountIndex: -1,
+			AccountIndex:  -1,
 		},
 	}, nil
 }
@@ -30,8 +30,12 @@ func (k *KeyAccount) DeriveAddress(changeType ChangeType, index uint32, network 
 
 	var changeTypeIndex = uint32(changeType)
 
-	if k.extendedKey.IsPrivate() { changeType = HardenedKeyZeroIndex + changeType }
-	if k.extendedKey.IsPrivate() { index = HardenedKeyZeroIndex + index }
+	if k.extendedKey.IsPrivate() {
+		changeType = HardenedKeyZeroIndex + changeType
+	}
+	if k.extendedKey.IsPrivate() {
+		index = HardenedKeyZeroIndex + index
+	}
 
 	changeTypeK, err := k.extendedKey.Child(changeTypeIndex)
 	if err != nil {
@@ -57,12 +61,12 @@ func (k *KeyAccount) DeriveAddress(changeType ChangeType, index uint32, network 
 
 	address := &Address{
 		HDStartPath: HDStartPath{
-			PurposeIndex: k.PurposeIndex,
+			PurposeIndex:  k.PurposeIndex,
 			CoinTypeIndex: k.CoinTypeIndex,
-			AccountIndex: k.AccountIndex,
+			AccountIndex:  k.AccountIndex,
 		},
 		HDEndPath: HDEndPath{
-			ChangeIndex: changeTypeIndex,
+			ChangeIndex:  changeTypeIndex,
 			AddressIndex: index,
 		},
 		Value: a.EncodeAddress(),

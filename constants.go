@@ -4,7 +4,7 @@ type ChangeType uint32
 
 const (
 	ExternalChangeType ChangeType = 0
-	InternalChangeType   ChangeType = 1
+	InternalChangeType ChangeType = 1
 )
 
 const HardenedKeyZeroIndex = 0x80000000
