@@ -12,8 +12,16 @@ type URIParams struct {
 	Message string
 }
 
-//FIXME return error if not amount or address
-func EncodeURI(p URIParams) string {
+func EncodeURI(p URIParams) (string, error) {
+
+	// TODO check if valid address
+	if p.Address == "" {
+		return "", fmt.Errorf("invalid address")
+	}
+
+	if p.Amount == 0 {
+		return "", fmt.Errorf("invalid amount '0'")
+	}
 
 	var uri = fmt.Sprintf(
 		"bitcoin:%s?amount=%s",
@@ -29,5 +37,5 @@ func EncodeURI(p URIParams) string {
 		uri = uri + fmt.Sprintf("&message=%s", p.Label)
 	}
 
-	return uri
+	return uri, nil
 }
