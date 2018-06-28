@@ -83,11 +83,12 @@ accountKey, _ := xKey.BIP44AccountKey(bitcoin_address.TestnetCoinType, 1, true)
 externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChangeType, 0, bitcoin_address.TESTNET3)
 ```
 
-
-
 ## TODO
 - [X] Report badge
 - [ ] Unit Tests
 - [ ] Create GoDoc
 - [ ] Stellar
 - [ ] Ethereum
+
+## Contribution
+Please feel free to contribute with both suggestions and new code :D
