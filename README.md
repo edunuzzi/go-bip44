@@ -61,7 +61,7 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChang
 
 | coin    | account | chain    | address | path                      |
 | ------- | ------- | -------- | ------- | ------------------------- |
-| Bitcoin | first   | external | second   | m / 44' / 0' / 0' / 0 / 1 |
+| Bitcoin | first   | external | second  | m / 44' / 0' / 0' / 0 / 1 |
 
 ```golang 
 xKey, _ := bitcoin_address.NewKeyFromSeedHex("your secret seed in hex format", bitcoin_address.MAINNET)
