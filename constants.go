@@ -1,4 +1,4 @@
-package bitcoin_address
+package bip44
 
 type ChangeType uint32
 

@@ -1,4 +1,4 @@
-package bitcoin_address
+package bip44
 
 type HDStartPath struct {
 	PurposeIndex  uint32 `json:"purpose_index"`
