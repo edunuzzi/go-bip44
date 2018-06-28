@@ -20,5 +20,4 @@ type CoinType uint32
 const (
 	BitcoinCoinType CoinType = 0
 	TestnetCoinType CoinType = 1
-	StellarCoinType CoinType = 148
 )
