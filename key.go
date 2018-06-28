@@ -1,8 +1,8 @@
 package bip44
 
 import (
-	"github.com/btcsuite/btcutil/hdkeychain"
 	"encoding/hex"
+	"github.com/btcsuite/btcutil/hdkeychain"
 )
 
 type ExtendedKey struct {
