@@ -83,7 +83,7 @@ func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, coinType CoinType, accI
 	if includePrivateKey {
 		return &AccountKey{
 			extendedKey: accK,
-			HDStartPath: hdStartPath,
+			startPath: hdStartPath,
 		}, nil
 	}
 
@@ -94,6 +94,6 @@ func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, coinType CoinType, accI
 
 	return &AccountKey{
 		extendedKey: pub,
-		HDStartPath: hdStartPath,
+		startPath: hdStartPath,
 	}, nil
 }
