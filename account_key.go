@@ -23,12 +23,12 @@ func NewAccountKeyFromXKey(value string) (*AccountKey, error) {
 
 func (k *AccountKey) DeriveP2PKAddress(changeType ChangeType, index uint32, network Network) (*Address, error) {
 
-	var changeTypeIndex = uint32(changeType)
-
 	if k.extendedKey.IsPrivate() {
 		changeType = HardenedKeyZeroIndex + changeType
 		index = HardenedKeyZeroIndex + index
 	}
+
+	var changeTypeIndex = uint32(changeType)
 
 	changeTypeK, err := k.extendedKey.Child(changeTypeIndex)
 	if err != nil {
