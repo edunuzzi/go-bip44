@@ -1,15 +1,15 @@
 package bitcoin_address
 
 import (
-	"encoding/hex"
 	"github.com/btcsuite/btcutil/hdkeychain"
+	"encoding/hex"
 )
 
 type ExtendedKey struct {
-	extendedKey *hdkeychain.ExtendedKey
+	key *hdkeychain.ExtendedKey
 }
 
-func NewKeyFromSeedHex(seed string, net Network) (privateKey *hdkeychain.ExtendedKey, err error) {
+func NewKeyFromSeedHex(seed string, net Network) (*ExtendedKey, error) {
 
 	pk, err := hex.DecodeString(seed)
 
@@ -20,15 +20,11 @@ func NewKeyFromSeedHex(seed string, net Network) (privateKey *hdkeychain.Extende
 	return NewKeyFromSeedBytes(pk, net)
 }
 
-func NewKeyFromSeedBytes(seed []byte, net Network) (privateKey *hdkeychain.ExtendedKey, err error) {
+func NewKeyFromSeedBytes(seed []byte, net Network) (*ExtendedKey, error) {
 
 	n, err := networkToChainConfig(net)
-	return hdkeychain.NewMaster(seed, n)
-}
 
-func NewKeyFromString(value string) (*ExtendedKey, error) {
-
-	xKey, err := hdkeychain.NewKeyFromString(value)
+	xKey, err := hdkeychain.NewMaster(seed, n)
 
 	if err != nil {
 		return nil, err
@@ -37,37 +33,33 @@ func NewKeyFromString(value string) (*ExtendedKey, error) {
 	return &ExtendedKey{xKey}, nil
 }
 
-func (e *ExtendedKey) BIP44AccountKey(accIndex uint32, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
+func (e *ExtendedKey) BIP44AccountKey(coinType CoinType, accIndex uint32, includePrivateKey bool) (*AccountKey, error) {
 
-	return e.baseDeriveAccount(BIP44Purpose, accIndex, coinType, includePrivateKey)
+	return e.baseDeriveAccount(BIP44Purpose, coinType, accIndex,includePrivateKey)
 }
 
-func (e *ExtendedKey) BIP49AccountKey(accIndex uint32, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
+func (e *ExtendedKey) BIP49AccountKey(coinType CoinType, accIndex uint32, includePrivateKey bool) (*AccountKey, error) {
 
-	return e.baseDeriveAccount(BIP49Purpose, accIndex, coinType, includePrivateKey)
+	return e.baseDeriveAccount(BIP49Purpose, coinType, accIndex,includePrivateKey)
 }
 
-func (e *ExtendedKey) BIP84AccountKey(accIndex uint32, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
+func (e *ExtendedKey) BIP84AccountKey(coinType CoinType, accIndex uint32, includePrivateKey bool) (*AccountKey, error) {
 
-	return e.baseDeriveAccount(BIP84Purpose, accIndex, coinType, includePrivateKey)
+	return e.baseDeriveAccount(BIP84Purpose, coinType, accIndex,includePrivateKey)
 }
 
-func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, accIndex uint32, coinType CoinType, includePrivateKey bool) (*KeyAccount, error) {
+func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, coinType CoinType, accIndex uint32, includePrivateKey bool) (*AccountKey, error) {
 
 	var purposeIndex = uint32(purpose)
 	var coinTypeIndex = uint32(coinType)
 
-	if e.extendedKey.IsPrivate() {
+	if e.key.IsPrivate() {
 		purposeIndex = HardenedKeyZeroIndex + purposeIndex
-	}
-	if e.extendedKey.IsPrivate() {
 		coinTypeIndex = HardenedKeyZeroIndex + coinTypeIndex
-	}
-	if e.extendedKey.IsPrivate() {
 		accIndex = HardenedKeyZeroIndex + accIndex
 	}
 
-	purposeK, err := e.extendedKey.Child(purposeIndex)
+	purposeK, err := e.key.Child(purposeIndex)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +81,7 @@ func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, accIndex uint32, coinTy
 	}
 
 	if includePrivateKey {
-		return &KeyAccount{
+		return &AccountKey{
 			extendedKey: accK,
 			HDStartPath: hdStartPath,
 		}, nil
@@ -100,7 +92,7 @@ func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, accIndex uint32, coinTy
 		return nil, err
 	}
 
-	return &KeyAccount{
+	return &AccountKey{
 		extendedKey: pub,
 		HDStartPath: hdStartPath,
 	}, nil

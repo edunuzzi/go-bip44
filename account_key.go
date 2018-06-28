@@ -4,21 +4,21 @@ import (
 	"github.com/btcsuite/btcutil/hdkeychain"
 )
 
-type KeyAccount struct {
+type AccountKey struct {
 	extendedKey *hdkeychain.ExtendedKey
-	HDStartPath
+	startPath HDStartPath
 }
 
-func NewKeyAccountFromXKey(value string) (*KeyAccount, error) {
+func NewAccountKeyFromXKey(value string) (*AccountKey, error) {
 	xKey, err := hdkeychain.NewKeyFromString(value)
 
 	if err != nil {
 		return nil, err
 	}
 
-	return &KeyAccount{
+	return &AccountKey{
 		extendedKey: xKey,
-		HDStartPath: HDStartPath{
+		startPath: HDStartPath{
 			PurposeIndex:  -1,
 			CoinTypeIndex: -1,
 			AccountIndex:  -1,
@@ -26,14 +26,12 @@ func NewKeyAccountFromXKey(value string) (*KeyAccount, error) {
 	}, nil
 }
 
-func (k *KeyAccount) DeriveAddress(changeType ChangeType, index uint32, network Network) (*Address, error) {
+func (k *AccountKey) DeriveAddress(changeType ChangeType, index uint32, network Network) (*Address, error) {
 
 	var changeTypeIndex = uint32(changeType)
 
 	if k.extendedKey.IsPrivate() {
 		changeType = HardenedKeyZeroIndex + changeType
-	}
-	if k.extendedKey.IsPrivate() {
 		index = HardenedKeyZeroIndex + index
 	}
 
@@ -61,9 +59,9 @@ func (k *KeyAccount) DeriveAddress(changeType ChangeType, index uint32, network 
 
 	address := &Address{
 		HDStartPath: HDStartPath{
-			PurposeIndex:  k.PurposeIndex,
-			CoinTypeIndex: k.CoinTypeIndex,
-			AccountIndex:  k.AccountIndex,
+			PurposeIndex:  k.startPath.PurposeIndex,
+			CoinTypeIndex: k.startPath.CoinTypeIndex,
+			AccountIndex:  k.startPath.AccountIndex,
 		},
 		HDEndPath: HDEndPath{
 			ChangeIndex:  changeTypeIndex,
