@@ -45,7 +45,7 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChang
 internalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChangeType, 0, bitcoin_address.MAINNET)
 ```
 
-### BIP44
+### Other Examples
 
 | coin    | account | chain    | address | path                      |
 | ------- | ------- | -------- | ------- | ------------------------- |
@@ -72,8 +72,6 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChang
 ```
 
 ---
-
-m / purpose' / coin_type' / account' / change / address_index
 
 | coin            | account  | chain    | address | path                      |
 | --------------- | -------- | -------- | ------- | ------------------------- |
