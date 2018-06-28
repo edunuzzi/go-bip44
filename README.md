@@ -2,7 +2,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/algoGuy/EasyMIDI)](https://goreportcard.com/report/github.com/algoGuy/EasyMIDI)
 [![GoDoc](https://godoc.org/github.com/algoGuy/EasyMIDI?status.svg)](https://godoc.org/github.com/algoGuy/EasyMIDI)
 
-A Golang implementation of the BIP44 for Hierarchical Deterministic (HD) addresses.
+A Golang implementation of the [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) for Hierarchical Deterministic (HD) addresses.
 
 Released under the terms of the [MIT LICENSE](LICENSE).
 
