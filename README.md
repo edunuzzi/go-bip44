@@ -14,7 +14,7 @@ We recommend every user of this library audit and verify any underlying code for
 
 ## Installation
 ```bash 
-go get -u ####TODO 
+go get -u github.com/Swipecoin/go-bip44 
 ```
 
 ## Usage
