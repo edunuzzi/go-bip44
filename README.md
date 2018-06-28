@@ -86,8 +86,8 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChang
 
 
 ## TODO
-- [X] Unit Tests
+- [X] Report card
+- [ ] Unit Tests
 - [ ] Create GoDoc
-- [ ] Report card
 - [ ] Stellar
 - [ ] Ethereum
