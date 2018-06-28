@@ -1,4 +1,4 @@
-# BIP44
+# Go-BIP44
 
 A Golang implementation of the [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) for Hierarchical Deterministic (HD) addresses.
 
