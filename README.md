@@ -91,4 +91,4 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChang
 - [ ] Ethereum
 
 ## Contribution
-Please feel free to contribute with both suggestions and new code :D
+Please feel free to contribute with both suggestions and pull requests :D
