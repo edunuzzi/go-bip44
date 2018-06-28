@@ -3,7 +3,7 @@ package bip44
 import "github.com/tyler-smith/go-bip39"
 
 type Mnemonic struct {
-	Value string
+	Value   string
 	BitSize int
 }
 

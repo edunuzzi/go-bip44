@@ -6,7 +6,7 @@ import (
 
 type AccountKey struct {
 	extendedKey *hdkeychain.ExtendedKey
-	startPath HDStartPath
+	startPath   HDStartPath
 }
 
 func NewAccountKeyFromXKey(value string) (*AccountKey, error) {
