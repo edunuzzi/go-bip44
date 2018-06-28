@@ -44,7 +44,7 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChang
 internalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChangeType, 0, bitcoin_address.MAINNET)
 ```
 
-### Other Examples
+### Deriving P2PK addresses
 
 | coin    | account | chain    | address | path                      |
 | ------- | ------- | -------- | ------- | ------------------------- |
