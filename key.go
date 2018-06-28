@@ -24,6 +24,10 @@ func NewKeyFromSeedBytes(seed []byte, net Network) (*ExtendedKey, error) {
 
 	n, err := networkToChainConfig(net)
 
+	if err != nil {
+		return nil, err
+	}
+
 	xKey, err := hdkeychain.NewMaster(seed, n)
 
 	if err != nil {
