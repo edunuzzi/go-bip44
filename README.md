@@ -1,4 +1,4 @@
-# HDWallets
+# BIP44
 [![Go Report Card](https://goreportcard.com/badge/github.com/algoGuy/EasyMIDI)](https://goreportcard.com/report/github.com/algoGuy/EasyMIDI)
 [![GoDoc](https://godoc.org/github.com/algoGuy/EasyMIDI?status.svg)](https://godoc.org/github.com/algoGuy/EasyMIDI)
 
@@ -6,7 +6,7 @@ A Golang implementation of the BIP44 for Hierarchical Deterministic (HD) address
 
 Released under the terms of the [MIT LICENSE](LICENSE).
 
-## Should i use this in production?
+## Should I use this in production?
 This library is in very early stages. Please be aware that some bugs may exist. 
 
 ## Can I trust this code?
