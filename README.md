@@ -19,10 +19,9 @@ We recommend every user of this library audit and verify any underlying code for
 go get -u ####TODO 
 ```
 
-## Quick Start:
+## Examples:
 
 ### BIP44
-m / purpose' / coin_type' / account' / change / address_index
 
 | coin    | account | chain    | address | path                      |
 | ------- | ------- | -------- | ------- | ------------------------- |
