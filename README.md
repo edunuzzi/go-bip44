@@ -2,9 +2,9 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/algoGuy/EasyMIDI)](https://goreportcard.com/report/github.com/algoGuy/EasyMIDI)
 [![GoDoc](https://godoc.org/github.com/algoGuy/EasyMIDI?status.svg)](https://godoc.org/github.com/algoGuy/EasyMIDI)
 
-A Golang implementation of the BIP44 for Hierarchical Deterministic (HD) Bitcoin addresses.
+A Golang implementation of the BIP44 for Hierarchical Deterministic (HD) addresses.
 
-Released under the terms of the [MIT LICENSE](LICENSE).  
+Released under the terms of the [MIT LICENSE](LICENSE).
 
 ## Should i use this in production?
 This library is in very early stages. Please be aware that some bugs may exist. 
@@ -37,7 +37,15 @@ xKey, _ := bitcoin_address.NewKeyFromSeedHex("your secret seed in hex format", b
 xKey, _ := bitcoin_address.NewKeyFromSeedBytes(seedBytes, bitcoin_address.MAINNET)
 ```
 
-### BIP44 - P2PK Address
+### From base58-encoded Extended Key
+```golang
+ak, _ := bitcoin_address.NewAccountKeyFromXKey(xPubKey)
+
+externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChangeType, 0, bitcoin_address.MAINNET)
+internalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChangeType, 0, bitcoin_address.MAINNET)
+```
+
+### BIP44
 
 | coin    | account | chain    | address | path                      |
 | ------- | ------- | -------- | ------- | ------------------------- |
@@ -79,8 +87,9 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChang
 ```
 
 
+
 ## TODO
 - [ ] Unit Tests
 - [ ] Create GoDoc
-- [ ] BIP49
-- [ ] BIP84
+- [ ] Stellar
+- [ ] Ethereum
