@@ -30,22 +30,14 @@ func NewKeyFromSeedBytes(seed []byte, net Network) (*ExtendedKey, error) {
 		return nil, err
 	}
 
-	return &ExtendedKey{xKey}, nil
+	return &ExtendedKey{
+		key: xKey,
+	}, nil
 }
 
 func (e *ExtendedKey) BIP44AccountKey(coinType CoinType, accIndex uint32, includePrivateKey bool) (*AccountKey, error) {
 
 	return e.baseDeriveAccount(BIP44Purpose, coinType, accIndex,includePrivateKey)
-}
-
-func (e *ExtendedKey) BIP49AccountKey(coinType CoinType, accIndex uint32, includePrivateKey bool) (*AccountKey, error) {
-
-	return e.baseDeriveAccount(BIP49Purpose, coinType, accIndex,includePrivateKey)
-}
-
-func (e *ExtendedKey) BIP84AccountKey(coinType CoinType, accIndex uint32, includePrivateKey bool) (*AccountKey, error) {
-
-	return e.baseDeriveAccount(BIP84Purpose, coinType, accIndex,includePrivateKey)
 }
 
 func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, coinType CoinType, accIndex uint32, includePrivateKey bool) (*AccountKey, error) {
@@ -75,9 +67,9 @@ func (e *ExtendedKey) baseDeriveAccount(purpose Purpose, coinType CoinType, accI
 	}
 
 	hdStartPath := HDStartPath{
-		PurposeIndex:  int32(purposeIndex),
-		CoinTypeIndex: int32(coinTypeIndex),
-		AccountIndex:  int32(accIndex),
+		PurposeIndex:  purposeIndex,
+		CoinTypeIndex: coinTypeIndex,
+		AccountIndex:  accIndex,
 	}
 
 	if includePrivateKey {

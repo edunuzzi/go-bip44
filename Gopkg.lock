@@ -25,13 +25,22 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/tyler-smith/go-bip39"
+  packages = ["."]
+  revision = "52158e4697b87de16ed390e1bdaf813e581008fa"
+
+[[projects]]
+  branch = "master"
   name = "golang.org/x/crypto"
-  packages = ["ripemd160"]
+  packages = [
+    "pbkdf2",
+    "ripemd160"
+  ]
   revision = "a49355c7e3f8fe157a85be2f77e6e269a0f89602"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "9a4508ce89b0dda0b08651a30a23f96cf690e9aea80196203ca9e6f71badb0ec"
+  inputs-digest = "b8a4772d7683413aa31bf86ff6a1dc69a7ab72613f056f8dda2b7e92507e31d1"
   solver-name = "gps-cdcl"
   solver-version = 1

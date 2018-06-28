@@ -1,9 +1,9 @@
 package bitcoin_address
 
 type HDStartPath struct {
-	PurposeIndex  int32 `json:"purpose_index"`
-	CoinTypeIndex int32 `json:"coin_type"`
-	AccountIndex  int32 `json:"account_index"`
+	PurposeIndex  uint32 `json:"purpose_index"`
+	CoinTypeIndex uint32 `json:"coin_type"`
+	AccountIndex  uint32 `json:"account_index"`
 }
 
 type HDEndPath struct {

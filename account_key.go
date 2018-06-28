@@ -18,15 +18,10 @@ func NewAccountKeyFromXKey(value string) (*AccountKey, error) {
 
 	return &AccountKey{
 		extendedKey: xKey,
-		startPath: HDStartPath{
-			PurposeIndex:  -1,
-			CoinTypeIndex: -1,
-			AccountIndex:  -1,
-		},
 	}, nil
 }
 
-func (k *AccountKey) DeriveAddress(changeType ChangeType, index uint32, network Network) (*Address, error) {
+func (k *AccountKey) DeriveP2PKAddress(changeType ChangeType, index uint32, network Network) (*Address, error) {
 
 	var changeTypeIndex = uint32(changeType)
 
