@@ -1,7 +1,8 @@
 # Go-BIP44
 [![Go Report Card](https://goreportcard.com/badge/github.com/Swipecoin/go-bip44)](https://goreportcard.com/report/github.com/Swipecoin/go-bip44)
 
-A Golang implementation of the [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) for Hierarchical Deterministic (HD) addresses. It currently only supports Bitcoin, but we plan to add others in the future.
+A Golang implementation of the [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) for Hierarchical Deterministic (HD) addresses. 
+It currently only supports Bitcoin, but we plan to add others in the future.
 
 Released under the terms of the [MIT LICENSE](LICENSE).
 
@@ -22,26 +23,26 @@ go get -u github.com/Swipecoin/go-bip44
 
 ### New 24-word Mnemonic and Seed
 ```golang
-mnemonic, _ := bitcoin_address.NewMnemonic(256)
+mnemonic, _ := bip44.NewMnemonic(256)
 seedBytes := m.NewSeed("my password")
 ```
 
 ### Master key From Seed Hex
 ```golang
-xKey, _ := bitcoin_address.NewKeyFromSeedHex("your secret seed in hex format", bitcoin_address.MAINNET)
+xKey, _ := bip44.NewKeyFromSeedHex("your secret seed in hex format", bip44.MAINNET)
 ```
 
 ### Master key From Seed bytes
 ```golang
-xKey, _ := bitcoin_address.NewKeyFromSeedBytes(seedBytes, bitcoin_address.MAINNET)
+xKey, _ := bip44.NewKeyFromSeedBytes(seedBytes, bip44.MAINNET)
 ```
 
 ### From base58-encoded Extended Key
 ```golang
-ak, _ := bitcoin_address.NewAccountKeyFromXKey(xPubKey)
+ak, _ := bip44.NewAccountKeyFromXKey(xPubKey)
 
-externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChangeType, 0, bitcoin_address.MAINNET)
-internalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChangeType, 0, bitcoin_address.MAINNET)
+externalAddress, _ := accountKey.DeriveP2PKAddress(bip44.ExternalChangeType, 0, bip44.MAINNET)
+internalAddress, _ := accountKey.DeriveP2PKAddress(bip44.InternalChangeType, 0, bip44.MAINNET)
 ```
 
 ### Deriving P2PK addresses
@@ -51,10 +52,10 @@ internalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChang
 | Bitcoin | first   | external | first   | m / 44' / 0' / 0' / 0 / 0 |
 
 ```golang 
-xKey, _ := bitcoin_address.NewKeyFromSeedHex("your secret seed in hex format", bitcoin_address.MAINNET)
-accountKey, _ := xKey.BIP44AccountKey(bitcoin_address.BitcoinCoinType, 0, true)
+xKey, _ := bip44.NewKeyFromSeedHex("your secret seed in hex format", bip44.MAINNET)
+accountKey, _ := xKey.BIP44AccountKey(bip44.BitcoinCoinType, 0, true)
 
-externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChangeType, 0, bitcoin_address.MAINNET)
+externalAddress, _ := accountKey.DeriveP2PKAddress(bip44.ExternalChangeType, 0, bip44.MAINNET)
 ```
 
 ---
@@ -64,10 +65,10 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChang
 | Bitcoin | first   | external | second  | m / 44' / 0' / 0' / 0 / 1 |
 
 ```golang 
-xKey, _ := bitcoin_address.NewKeyFromSeedHex("your secret seed in hex format", bitcoin_address.MAINNET)
-accountKey, _ := xKey.BIP44AccountKey(bitcoin_address.BitcoinCoinType, 0, true)
+xKey, _ := bip44.NewKeyFromSeedHex("your secret seed in hex format", bip44.MAINNET)
+accountKey, _ := xKey.BIP44AccountKey(bip44.BitcoinCoinType, 0, true)
 
-externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChangeType, 1, bitcoin_address.MAINNET)
+externalAddress, _ := accountKey.DeriveP2PKAddress(bip44.ExternalChangeType, 1, bip44.MAINNET)
 ```
 
 ---
@@ -77,10 +78,10 @@ externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.ExternalChang
 | Bitcoin Testnet | second   | internal | first   | m / 44' / 1' / 1' / 1 / 0 |
 
 ```golang 
-xKey, _ := bitcoin_address.NewKeyFromSeedHex("your secret seed in hex format", bitcoin_address.TESTNET3)
-accountKey, _ := xKey.BIP44AccountKey(bitcoin_address.TestnetCoinType, 1, true)
+xKey, _ := bip44.NewKeyFromSeedHex("your secret seed in hex format", bip44.TESTNET3)
+accountKey, _ := xKey.BIP44AccountKey(bip44.TestnetCoinType, 1, true)
 
-externalAddress, _ := accountKey.DeriveP2PKAddress(bitcoin_address.InternalChangeType, 0, bitcoin_address.TESTNET3)
+externalAddress, _ := accountKey.DeriveP2PKAddress(bip44.InternalChangeType, 0, bip44.TESTNET3)
 ```
 
 ## TODO
