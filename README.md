@@ -12,7 +12,8 @@ This library is in very early stages. Please be aware that some bugs may exist.
 ## Can I trust this code?
 > Do not trust. Verify.
 
-We recommend every user of this library audit and verify any underlying code for its validity and suitability.
+Since this lib is in its early days, we recommend every user of this library audit and verify any underlying code for its validity and suitability.
+You can do so by using [this tool](https://iancoleman.io/bip39/).
 
 ## Installation
 ```bash 
@@ -23,7 +24,9 @@ go get -u github.com/Swipecoin/go-bip44
 
 ### New 24-word Mnemonic and Seed
 ```golang
-mnemonic, _ := bip44.NewMnemonic(256)
+// bitSize must be a multiple of 32
+bitSize := 256
+mnemonic, _ := bip44.NewMnemonic(bitSize)
 seedBytes := m.NewSeed("my password")
 ```
 
