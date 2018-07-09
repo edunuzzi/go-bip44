@@ -30,12 +30,12 @@ mnemonic, _ := bip44.NewMnemonic(bitSize)
 seedBytes := m.NewSeed("my password")
 ```
 
-### Master key From Seed Hex
+### Master key From Seed Hex - (Unstable yet)
 ```golang
 xKey, _ := bip44.NewKeyFromSeedHex("your secret seed in hex format", bip44.MAINNET)
 ```
 
-### Master key From Seed bytes
+### Master key From Seed bytes - (Unstable yet)
 ```golang
 xKey, _ := bip44.NewKeyFromSeedBytes(seedBytes, bip44.MAINNET)
 ```
