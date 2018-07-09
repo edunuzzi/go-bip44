@@ -1,10 +1,11 @@
 package bip44
 
-import "github.com/tyler-smith/go-bip39"
+import (
+	"github.com/tyler-smith/go-bip39"
+)
 
 type Mnemonic struct {
 	Value   string
-	BitSize int
 }
 
 // bitSize must be a multiple of 32
@@ -17,9 +18,13 @@ func NewMnemonic(bitSize int) (*Mnemonic, error) {
 
 	m, e := bip39.NewMnemonic(entropy)
 
-	return &Mnemonic{m, bitSize}, e
+	return &Mnemonic{m}, e
 }
 
-func (m *Mnemonic) NewSeed(password string) []byte {
-	return bip39.NewSeed(m.Value, password)
+func ParseMnemonic(mnemonic string) Mnemonic {
+	return Mnemonic{mnemonic}
+}
+
+func (m Mnemonic) NewSeed(password string) ([]byte, error) {
+	return bip39.NewSeedWithErrorChecking(m.Value, password)
 }
