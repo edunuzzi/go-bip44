@@ -34,7 +34,7 @@ func EncodeURI(p URIParams) (string, error) {
 	}
 
 	if p.Message != "" {
-		uri = uri + fmt.Sprintf("&message=%s", p.Label)
+		uri = uri + fmt.Sprintf("&message=%s", p.Message)
 	}
 
 	return uri, nil
