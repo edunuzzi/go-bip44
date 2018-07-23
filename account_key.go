@@ -9,7 +9,7 @@ type AccountKey struct {
 	startPath   HDStartPath
 }
 
-func NewAccountKeyFromXKey(value string) (*AccountKey, error) {
+func NewAccountKeyFromXPubKey(value string) (*AccountKey, error) {
 	xKey, err := hdkeychain.NewKeyFromString(value)
 
 	if err != nil {

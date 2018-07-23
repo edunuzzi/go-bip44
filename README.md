@@ -42,7 +42,7 @@ xKey, _ := bip44.NewKeyFromSeedBytes(seedBytes, bip44.MAINNET)
 
 ### From base58-encoded Extended Key
 ```golang
-ak, _ := bip44.NewAccountKeyFromXKey(xPubKey)
+ak, _ := bip44.NewAccountKeyFromXPubKey(xPubKey)
 
 externalAddress, _ := accountKey.DeriveP2PKAddress(bip44.ExternalChangeType, 0, bip44.MAINNET)
 internalAddress, _ := accountKey.DeriveP2PKAddress(bip44.InternalChangeType, 0, bip44.MAINNET)
