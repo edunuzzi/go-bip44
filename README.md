@@ -2,7 +2,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/Swipecoin/go-bip44)](https://goreportcard.com/report/github.com/Swipecoin/go-bip44)
 
 A Golang implementation of the [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) for Hierarchical Deterministic (HD) addresses. 
-It currently only supports Bitcoin, but we plan to add others in the future.
+It currently only supports Bitcoin.
 
 Released under the terms of the [MIT LICENSE](LICENSE).
 
@@ -17,7 +17,7 @@ You can do so by using [this tool](https://iancoleman.io/bip39/).
 
 ## Installation
 ```bash 
-go get -u github.com/Swipecoin/go-bip44 
+go get -u github.com/edunuzzi/go-bip44 
 ```
 
 ## Usage
