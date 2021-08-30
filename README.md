@@ -1,4 +1,4 @@
-# Go-BIP44
+# Go-BIP44 (Unmaintained!!!)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Swipecoin/go-bip44)](https://goreportcard.com/report/github.com/Swipecoin/go-bip44)
 
 A Golang implementation of the [BIP44](https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki) for Hierarchical Deterministic (HD) addresses. 
