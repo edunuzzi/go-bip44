@@ -17,6 +17,7 @@
   branch = "master"
   name = "github.com/btcsuite/btcd"
   packages = [
+    "btcec",
     "chaincfg",
     "chaincfg/chainhash",
     "wire"
